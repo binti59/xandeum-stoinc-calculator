@@ -1,171 +1,247 @@
-# Xandeum STOINC Calculator
+# Advanced Xandeum STOINC Calculator
 
-A React-based calculator for estimating rewards and storage income from participating in the Xandeum Devnet. This calculator helps users understand potential earnings from running validator nodes, pNodes, or moderating the Discord community.
+🚀 **Live Demo**: https://flycgmlj.manus.space  
+📁 **GitHub Repository**: https://github.com/binti59/xandeum-stoinc-calculator
 
-## Features
+A comprehensive React-based calculator for calculating Storage Income (STOINC) from the Xandeum Devnet. This calculator implements the complete STOINC formula system including storage credits, boost factors, NFT bonuses, and the final distribution calculation.
 
-- **Rewards Calculator**: Calculate monthly XAND token rewards for different node types
-- **Storage Income Calculator**: Estimate income from pNode storage operations
-- **Multiple Timeframes**: View projections for daily, monthly, and yearly earnings
-- **Real-time Updates**: Calculations update automatically as you change parameters
-- **Responsive Design**: Works on both desktop and mobile devices
-- **Information Hub**: Detailed information about the Xandeum rewards program
+## 🎯 Features
 
-## Node Types Supported
+### Complete STOINC Formula Implementation
+- **Storage Credits Calculation**: `pNodes × storageSpace × performanceScore × stake`
+- **Boost Factor System**: Geometric mean calculation for multiple pNodes
+- **NFT Bonuses**: All 6 NFT types with correct multipliers
+- **Purchase Era Boosts**: All 6 purchase eras with accurate boost factors
+- **Final STOINC Distribution**: `(boostedCredits / totalBoostedCredits) × totalFees × pNodeShare`
 
-1. **Validator Node Operators**: 10,000 XAND/month
-2. **pNode Operators**: 10,000 XAND/month + storage income
-3. **Discord Moderators**: 40,000 XAND/month
+### Advanced Calculator Features
+- **Individual pNode Configuration**: Configure each pNode separately
+- **Real-time Calculations**: All values update instantly as you change parameters
+- **Multiple Timeframes**: Per epoch (2 days), monthly, and yearly projections
+- **Network Parameters**: Configurable total fees, pNode share, and network credits
+- **Visual Formula Display**: Complete mathematical equations and explanations
 
-## Getting Started
+### Professional Interface
+- **3-Tab Layout**: Calculator, Formulas & Math, Information
+- **Responsive Design**: Works perfectly on desktop and mobile
+- **Modern UI**: Gradient backgrounds with professional styling
+- **Interactive Elements**: Checkboxes for NFTs, dropdowns for eras
+
+## 📊 NFT Boost Factors
+
+| NFT Type | Boost Factor | Percentage Increase |
+|----------|--------------|-------------------|
+| Titan NFT | 11x | 1,000% boost |
+| Dragon NFT | 4x | 300% boost |
+| Coyote NFT | 2.5x | 150% boost |
+| Rabbit NFT | 1.5x | 50% boost |
+| XENO NFT | 1.1x | 10% boost |
+| Cricket NFT | 1.1x | 10% boost |
+
+## 🏆 Purchase Era Boosts
+
+| Era | Boost Factor | Percentage Increase |
+|-----|--------------|-------------------|
+| DeepSouth Era | 16x | 1,500% boost |
+| South Era | 10x | 900% boost |
+| Main Era | 7x | 600% boost |
+| Coal Era | 3.5x | 250% boost |
+| Central Era | 2x | 100% boost |
+| North Era | 1.25x | 25% boost |
+
+## 🔧 Getting Started
 
 ### Prerequisites
-
 - Node.js (v18 or higher)
 - pnpm (recommended) or npm
 
 ### Installation
+```bash
+# Clone the repository
+git clone https://github.com/binti59/xandeum-stoinc-calculator.git
+cd xandeum-stoinc-calculator
 
-1. Clone this repository:
-   \`\`\`bash
-   git clone <your-repository-url>
-   cd xandeum-stoinc-calculator
-   \`\`\`
+# Install dependencies
+pnpm install
 
-2. Install dependencies:
-   \`\`\`bash
-   pnpm install
-   \`\`\`
+# Start development server
+pnpm run dev
 
-3. Start the development server:
-   \`\`\`bash
-   pnpm run dev
-   \`\`\`
+# Build for production
+pnpm run build
+```
 
-4. Open your browser and navigate to \`http://localhost:5173\`
+### Development
+```bash
+# Start development server with hot reload
+pnpm run dev
 
-## Connecting to Your GitHub Account
+# Build for production
+pnpm run build
 
-### Step 1: Create a New Repository on GitHub
+# Preview production build
+pnpm run preview
+```
 
-1. Go to [GitHub](https://github.com/binti59)
-2. Click "New repository"
-3. Name it "xandeum-stoinc-calculator" (or your preferred name)
-4. Make it public or private as desired
-5. **Do NOT** initialize with README, .gitignore, or license (we already have these)
-6. Click "Create repository"
+## 📈 How STOINC is Calculated
 
-### Step 2: Connect Local Repository to GitHub
+### 1. Storage Credits Formula
+```
+storageCredits = pNodes × storageSpace × performanceScore × stake
+```
 
-Run these commands in your project directory:
+**Key Factors:**
+- **pNodes**: Number of pNodes owned
+- **storageSpace**: Total storage capacity (GB)
+- **performanceScore**: Network-measured performance (0-1 scale)
+- **stake**: Amount of XAND staked
 
-\`\`\`bash
-# Add your GitHub repository as remote origin
-git remote add origin https://github.com/binti59/xandeum-stoinc-calculator.git
+### 2. Boost Factors Formula
+```
+boostedCredits = storageCredits × (boost₁ × boost₂ × ... × boostₙ)^(1/n)
+```
 
-# Push your code to GitHub
-git branch -M main
-git push -u origin main
-\`\`\`
+**Boost Sources:**
+- **NFTs**: Provide multipliers from 1.1x to 11x
+- **Purchase Eras**: Provide multipliers from 1.25x to 16x
+- **Geometric Mean**: Prevents single high-boost dominance
 
-## Deployment Options
+### 3. Final STOINC Distribution
+```
+STOINC = (boostedCredits / totalBoostedCredits) × totalFees × pNodeShare
+```
 
-### Option 1: Vercel (Recommended - Free)
+**Variables:**
+- **totalFees**: All storage fees collected from sedApps (in SOL)
+- **pNodeShare**: Percentage of fees allocated to pNodes (e.g., 94%)
+- **totalBoostedCredits**: Sum of boosted credits across all network participants
 
-1. Go to [Vercel](https://vercel.com)
-2. Sign up/login with your GitHub account
-3. Click "New Project"
-4. Import your GitHub repository
-5. Vercel will automatically detect it's a React app
-6. Click "Deploy"
-7. Your site will be live at \`https://your-project-name.vercel.app\`
+## 💰 Rewards vs STOINC
 
-### Option 2: Netlify (Free)
+### XAND Rewards (Fixed Monthly)
+- **Validator Nodes**: 10,000 XAND/month
+- **pNode Operators**: 10,000 XAND/month
+- **Discord Moderators**: 40,000 XAND/month
+- Paid in locked XAND tokens
+- Funded by Xandeum Foundation
 
-1. Go to [Netlify](https://netlify.com)
-2. Sign up/login with your GitHub account
-3. Click "New site from Git"
-4. Choose GitHub and select your repository
-5. Build settings:
-   - Build command: \`pnpm run build\`
-   - Publish directory: \`dist\`
-6. Click "Deploy site"
+### STOINC (Variable)
+- Paid in SOL from sedApp storage fees
+- Calculated every epoch (~2 days)
+- Based on your boosted credits vs network total
+- Can vary significantly based on network usage
 
-### Option 3: GitHub Pages (Free)
+## 🚀 Deployment Options
 
-1. In your GitHub repository, go to Settings > Pages
-2. Source: Deploy from a branch
-3. Branch: \`gh-pages\` (you'll need to create this)
-4. Add this to your \`package.json\` scripts:
-   \`\`\`json
-   "scripts": {
-     "deploy": "pnpm run build && npx gh-pages -d dist"
-   }
-   \`\`\`
-5. Install gh-pages: \`pnpm add -D gh-pages\`
-6. Run: \`pnpm run deploy\`
+### Option 1: Vercel (Recommended)
+1. Fork this repository
+2. Connect to [Vercel](https://vercel.com)
+3. Import your repository
+4. Deploy automatically
 
-### Option 4: Your Own Domain
+### Option 2: Netlify
+1. Fork this repository
+2. Connect to [Netlify](https://netlify.com)
+3. Set build command: `pnpm run build`
+4. Set publish directory: `dist`
 
-If you have your own hosting service:
+### Option 3: GitHub Pages
+```bash
+# Install gh-pages
+pnpm add -D gh-pages
 
-1. Build the project: \`pnpm run build\`
-2. Upload the contents of the \`dist\` folder to your web server
-3. Configure your web server to serve the \`index.html\` for all routes
+# Add to package.json scripts
+"deploy": "pnpm run build && npx gh-pages -d dist"
 
-## Customization
+# Deploy
+pnpm run deploy
+```
 
-### Updating Reward Rates
+## 🛠 Customization
 
-To update the reward rates, modify the \`rewardRates\` object in \`src/App.jsx\`:
+### Update Boost Factors
+Edit the boost factor objects in `src/App.jsx`:
 
-\`\`\`javascript
-const rewardRates = {
-  validator: 10000,  // XAND per month
-  pnode: 10000,      // XAND per month
-  discord: 40000     // XAND per month
+```javascript
+const nftBoosts = {
+  'titan': { name: 'Titan NFT', boost: 11, description: '1,000% boost' },
+  // ... other NFTs
 }
-\`\`\`
 
-### Updating Storage Income Calculation
+const eraBoosts = {
+  'deepsouth': { name: 'DeepSouth Era', boost: 16, description: '1,500% boost' },
+  // ... other eras
+}
+```
 
-The storage income calculation is in the \`calculateStorageIncome\` function. Currently set to $0.01 per GB per month:
+### Update Network Parameters
+Modify default values in the component state:
+```javascript
+const [totalFees, setTotalFees] = useState(1000) // SOL
+const [pNodeShare, setPNodeShare] = useState(0.94) // 94%
+const [totalNetworkBoostedCredits, setTotalNetworkBoostedCredits] = useState(1000000)
+```
 
-\`\`\`javascript
-const monthlyStorageIncome = storageAmount * 0.01 * nodeCount
-\`\`\`
+## 🔍 Example Calculation
 
-### Styling
+**Scenario**: 3 pNodes with 100,000 total storage credits
 
-The app uses Tailwind CSS for styling. You can customize colors and design in:
-- \`src/App.css\` - Main styles and color variables
-- \`src/App.jsx\` - Component styling classes
+**pNode Boosts**:
+- pNode 1: 1.5x boost (Rabbit NFT)
+- pNode 2: 1.0x boost (no boosts)
+- pNode 3: 2.0x boost (Central Era)
 
-## Technologies Used
+**Calculation**:
+```
+Geometric Mean = (1.5 × 1.0 × 2.0)^(1/3) = 1.442
+Boosted Credits = 100,000 × 1.442 = 144,225
+Average Boost = 44.225%
+```
 
-- **React 19** - Frontend framework
-- **Tailwind CSS** - Styling
-- **shadcn/ui** - UI components
-- **Lucide React** - Icons
-- **Vite** - Build tool
+If network has 1M total boosted credits and 1,000 SOL in fees:
+```
+STOINC = (144,225 / 1,000,000) × 1,000 × 0.94 = 135.57 SOL per epoch
+```
 
-## Contributing
+## 🏗 Technical Stack
+
+- **Frontend**: React 19
+- **Styling**: Tailwind CSS
+- **UI Components**: shadcn/ui
+- **Icons**: Lucide React
+- **Build Tool**: Vite
+- **Package Manager**: pnpm
+
+## 📝 Contributing
 
 1. Fork the repository
-2. Create a feature branch: \`git checkout -b feature-name\`
-3. Commit your changes: \`git commit -m 'Add feature'\`
-4. Push to the branch: \`git push origin feature-name\`
-5. Open a Pull Request
+2. Create a feature branch: `git checkout -b feature-name`
+3. Make your changes
+4. Commit: `git commit -m 'Add feature'`
+5. Push: `git push origin feature-name`
+6. Open a Pull Request
 
-## License
+## 📄 License
 
 This project is open source and available under the [MIT License](LICENSE).
 
-## Support
+## 🆘 Support
 
-For questions or support, please open an issue on GitHub or contact the development team.
+- **GitHub Issues**: Report bugs or request features
+- **Live Demo**: Test the calculator at https://flycgmlj.manus.space
+- **Documentation**: Complete formulas and examples included
+
+## ⚠️ Disclaimer
+
+This calculator provides estimates based on current Xandeum Devnet parameters. Actual STOINC earnings may vary based on:
+- Network conditions and usage
+- sedApp fee generation
+- Changes to the STOINC distribution formula
+- Performance scores and network participation
+
+Always refer to official Xandeum documentation for the most current information.
 
 ---
 
-**Note**: This calculator provides estimates based on current Xandeum Devnet parameters. Actual earnings may vary based on network conditions and program updates.
+**Built with ❤️ for the Xandeum Community**
 
